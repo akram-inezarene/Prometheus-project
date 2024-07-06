@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  namespace: default
+  name: messaging-app-monitor
+  labels:
+    app: messaging-app
+    release: prometheus-operator
+spec:
+  selector:
+    matchLabels:
+      app: messaging-app
+  endpoints:
+  - port: http
+    interval: 15s
+    path: /metrics
+  namespaceSelector:
+    matchNames:
+    - default
+
